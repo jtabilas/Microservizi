@@ -27,3 +27,4 @@ L'architettura è composta da quattro microservizi distinti:
 Tutte le chiamate di ingresso al sistema vengono gestite attraverso un API Gateway. L'API Gateway agisce come intermediario tra i client e i vari microservizi, semplificando l'accesso e offrendo funzionalità trasversali.
 
 
+![ms drawio (1)](https://github.com/jtabilas/Microservizi/assets/94932581/223a7ebc-22d2-4141-9add-66a6968790d1)
