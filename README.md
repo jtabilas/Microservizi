@@ -32,7 +32,8 @@ Tutte le chiamate di ingresso al sistema vengono gestite attraverso un API Gatew
 
 ## Architettura del db 
 
-![update](https://github.com/jtabilas/Microservizi/assets/94932581/2ab66a17-6cf2-4593-ac71-6c0bf46d6c4f)
+![db-schema](https://github.com/jtabilas/Microservizi/assets/94932581/de248d4b-aed3-4335-92cd-4a58acb1c5e3)
+
 
 
 
