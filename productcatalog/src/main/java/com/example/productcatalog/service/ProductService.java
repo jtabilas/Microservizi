@@ -1,45 +1,54 @@
 package com.example.productcatalog.service;
 
 import com.example.productcatalog.model.Product;
-import com.example.productcatalog.repository.ProductRepositroy;
+import com.example.productcatalog.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.sound.sampled.Port;
+
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ProductService {
 
     @Autowired
-    private ProductRepositroy productRepositroy;
+    private ProductRepository productRepository;
 
     public List<Product> getAllProduct() {
-        return productRepositroy.findAll();
+        return productRepository.findAll();
     }
 
-    public Optional<Product> getProductById(int id) {
-        return productRepositroy.findById(id);
+    public Product getProductById(int id) {
+        Product tempProduct = productRepository.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return tempProduct;
     }
 
     public Product addProduct(Product product) {
-        return productRepositroy.save(product);
+        return productRepository.save(product);
     }
 
     public Product updateProduct(int id, Product p) {
-        Product product = productRepositroy.getOne(id);
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException((HttpStatus.NOT_FOUND)));
 
         //update product details
         product.setName(p.getName());
+        product.setDescription(p.getDescription());
+        product.setCategory(p.getCategory());
+        product.setPrice(p.getPrice());
         product.setCodeProduct(p.getCodeProduct());
+        product.setAviability(p.getAviability());
 
-        return productRepositroy.save(product);
+        return productRepository.save(product);
 
     }
 
 
-    public void deleteProduct(int id) {
-        productRepositroy.deleteById(id);
+    public String deleteProduct(int id) {
+        productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        productRepository.deleteById(id);
+        return "Product delete success";
     }
 }

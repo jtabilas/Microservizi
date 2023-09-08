@@ -25,7 +25,7 @@ public class ProductController {
 
     //get product by id
     @GetMapping("/products/{id}")
-    public Optional<Product> getProductById(@PathVariable int id) {
+    public Product getProductById(@PathVariable int id) {
         return ps.getProductById(id);
     }
 
@@ -44,8 +44,8 @@ public class ProductController {
 
     //delete product by id
     @DeleteMapping("/products/{id}")
-    public void deleteProductById(@PathVariable int id) {
-        ps.deleteProduct(id);
+    public String deleteProductById(@PathVariable int id) {
+        return ps.deleteProduct(id);
     }
 
 }
