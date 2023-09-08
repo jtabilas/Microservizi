@@ -3,40 +3,47 @@ package com.example.cartserver.service;
 import com.example.cartserver.model.Cart;
 import com.example.cartserver.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CartService {
 
     @Autowired
-    private  CartRepository cr;
+    private  CartRepository repo;
 
     public List<Cart> getAllCart() {
-        return cr.findAll();
+        return repo.findAll();
     }
 
-    public Optional<Cart> getCartById(int id) {
-        return cr.findById(id);
+    public Cart getCartById(int id) {
+        return repo.findById(id).get();
     }
 
     public Cart addCart(Cart cart) {
-        return  cr.save(cart);
+        return  repo.save(cart);
     }
 
-    public void deleteCart(int id) {
-        cr.deleteById(id);
+    public String deleteCart(int id) {
+        Cart cartDelete = repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if(cartDelete != null) {
+            repo.deleteById(id);
+        }
+        return "Cart delete success";
     }
 
     public Cart updateCart(int id, Cart cart) {
-        Cart cart1 = cr.getOne(id);
+        Cart updateCart = repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        cart1.setQuantity(cart.getQuantity());
-        cart1.setStatus(cart.getStatus());
+        updateCart.setQuantityProduct(cart.getQuantityProduct());
+        updateCart.setShippingPrice(cart.getShippingPrice());
 
-        return cr.save(cart1);
+        return repo.save(updateCart);
     }
 
 }

@@ -14,36 +14,36 @@ public class CartController {
 
 
     @Autowired
-    private CartService cs;
+    private CartService service;
 
     // get all cart
     @GetMapping("/cart")
     public List<Cart> getAllCart() {
-        return cs.getAllCart();
+        return service.getAllCart();
     }
 
     // get cart by id
     @GetMapping("/cart/{id}")
-    public Optional<Cart> getCartById(@PathVariable int id) {
-        return cs.getCartById(id);
+    public Cart getCartById(@PathVariable int id) {
+        return service.getCartById(id);
     }
 
     // add cart
     @PostMapping("/cart")
     public Cart addCart(@RequestBody Cart cart) {
-        return cs.addCart(cart);
+        return service.addCart(cart);
     }
 
 
     // delete cart
     @DeleteMapping("/cart/{id}")
-    public void deleteCart(@PathVariable int id) {
-        cs.deleteCart(id);
+    public String deleteCart(@PathVariable int id) {
+        return service.deleteCart(id);
     }
 
     //update cart
     @PutMapping("/cart/{id}")
     public Cart updateCart(@PathVariable int id, @RequestBody Cart cart) {
-        return cs.updateCart(id, cart);
+        return service.updateCart(id, cart);
     }
 }
