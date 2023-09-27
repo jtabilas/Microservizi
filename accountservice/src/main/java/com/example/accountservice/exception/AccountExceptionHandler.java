@@ -23,4 +23,16 @@ public class AccountExceptionHandler {
 
         return  new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<AccountErrorResponse> emailExistsHandler (EmailExistsException exception, HttpServletRequest req) {
+        AccountErrorResponse error = new AccountErrorResponse(
+                ZonedDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                req.getRequestURI(),
+                exception.getMessage());
+
+        return  new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
 }
