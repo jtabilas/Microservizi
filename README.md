@@ -34,6 +34,20 @@ Tutte le chiamate di ingresso al sistema vengono gestite attraverso un API Gatew
 
 ![db-schema](https://github.com/jtabilas/Microservizi/assets/94932581/de248d4b-aed3-4335-92cd-4a58acb1c5e3)
 
+## Funzionamento del Account Service 
 
+   -   Aggiungere i dati di un utente mediante un RequestBody attraverso  un post nell'indirizzo "http://localhost:8080/api/addAccount".
 
+![1](https://github.com/jtabilas/Microservizi/assets/94932581/b457c238-e861-4add-bc60-5bcc2de772ca)
 
+   -   Check di tutti gli utenti attraverso un get nell'indirizzo "http://localhost:8080/api/accounts".
+   
+![2](https://github.com/jtabilas/Microservizi/assets/94932581/67776dcc-07ed-4fce-9397-170f452b41b2)
+
+   -   Login con dati corretti nell'indirizzo "http://localhost:8080/api/login"   
+
+![3](https://github.com/jtabilas/Microservizi/assets/94932581/966e27b4-e067-49ba-86aa-95e3032695b2)
+
+   -   Login con dati errati nell'indirizzo "http://localhost:8080/api/login"
+
+![4](https://github.com/jtabilas/Microservizi/assets/94932581/c9577e82-970e-43dd-b688-82f7c58acd06)
