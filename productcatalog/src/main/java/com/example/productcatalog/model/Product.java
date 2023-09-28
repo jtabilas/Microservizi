@@ -19,5 +19,5 @@ public class Product {
     private float   price;
     private String  category;
     private String codeProduct;
-    private  int    aviability;
+    private  int    availability;
 }

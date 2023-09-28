@@ -15,23 +15,23 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository repo;
 
     public List<Product> getAllProduct() {
-        return productRepository.findAll();
+        return repo.findAll();
     }
 
     public Product getProductById(int id) {
-        Product tempProduct = productRepository.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Product tempProduct = repo.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND));
         return tempProduct;
     }
 
     public Product addProduct(Product product) {
-        return productRepository.save(product);
+        return repo.save(product);
     }
 
     public Product updateProduct(int id, Product p) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException((HttpStatus.NOT_FOUND)));
+        Product product = repo.findById(id).orElseThrow(() -> new ResponseStatusException((HttpStatus.NOT_FOUND)));
 
         //update product details
         product.setName(p.getName());
@@ -39,16 +39,16 @@ public class ProductService {
         product.setCategory(p.getCategory());
         product.setPrice(p.getPrice());
         product.setCodeProduct(p.getCodeProduct());
-        product.setAviability(p.getAviability());
+        product.setAvailability(p.getAvailability());
 
-        return productRepository.save(product);
+        return repo.save(product);
 
     }
 
 
     public String deleteProduct(int id) {
-        productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        productRepository.deleteById(id);
-        return "Product delete success";
+        repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        repo.deleteById(id);
+        return "Product deleted successfully!.";
     }
 }
