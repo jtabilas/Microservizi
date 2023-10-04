@@ -36,9 +36,13 @@ public class CartService {
         return repo.save(cart);
     }
 
+    public Cart cartById(int idCart) {
+        return  repo.findById(idCart).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
     public String addToCart(int productID, int quantity, int cartID) {
         ProductDto productDto = webClient.get()
-                .uri("http://localhost:8082/api/products/" + productID)
+                .uri("http://localhost:8010/api/products/" + productID)
                 .retrieve()
                 .bodyToMono(ProductDto.class)
                 .block();
@@ -87,7 +91,7 @@ public class CartService {
     // PUT per aggiornare la disponibilità del prodotto
     public void updateProduct(ProductDto productDto) {
         webClient.put()
-                .uri("http://localhost:8082/api/products/" + productDto.getId())
+                .uri("http://localhost:8010/api/products/" + productDto.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(productDto))
                 .retrieve()

@@ -30,6 +30,11 @@ public class CartController {
         return new ResponseEntity<>(service.addToCart(productId, quantity, cartId),HttpStatus.OK);
     }
 
+    @GetMapping("/cart/{idCart}" +
+            "")
+    public ResponseEntity<?> getCartById(@PathVariable int idCart) {
+        return new ResponseEntity<>(service.cartById(idCart), HttpStatus.OK);
+    }
 
     // Lista degli items nel carello
     @GetMapping("/cart")
