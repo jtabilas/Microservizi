@@ -3,8 +3,10 @@ package com.example.accountservice.security.utils;
 import com.example.accountservice.model.Account;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,15 @@ import java.util.Date;
 public class JwtTokenProvider {
 
 
-    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    @Value("${jwt.secret}")
+    private String secret;
+
+    private Key key;
+
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
 
 
     public String jwtBuilder(String username, Date date, Date expiryDate) {
@@ -27,7 +37,7 @@ public class JwtTokenProvider {
                 .setSubject(username)
                 .setIssuedAt(date)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512,key)
+                .signWith(key)
                 .compact();
     }
 
