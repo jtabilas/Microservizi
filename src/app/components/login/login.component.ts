@@ -3,7 +3,6 @@ import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import {HttpProviderService} from "../../service/http-provider.service";
 import {ToastrService} from "ngx-toastr";
-import {timeInterval, timeout} from "rxjs";
 
 @Component({
   selector: 'app-login',

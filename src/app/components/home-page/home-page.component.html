@@ -1,1 +1,17 @@
-<p>home-page works!</p>
+<app-header></app-header>
+<div class="container mt-4">
+  <h2>Prodotti in Evidenza</h2>
+  <div class="row">
+    <div *ngFor="let product of dtoProduct" class="col-md-4">
+      <div class="card mb-4">
+        <img src="/assets/not-found.png" class="card-img-top" [alt]="product.name">
+        <div class="card-body" >
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">Prezzo: {{ product.price }}</p>
+          <button class="btn btn-primary">Aggiungi al Carrello</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
